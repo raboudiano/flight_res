@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load tz %}
+{% block title %}Flights{% endblock %}
+{% block content %}
+<h2>Available Flights</h2>
+<form method="get" style="margin-bottom:12px; display:flex; gap:8px; align-items:end;">
+    <label>Origin<br><input type="text" name="origin" value="{{ origin }}" placeholder="e.g. JFK"></label>
+    <label>Destination<br><input type="text" name="destination" value="{{ destination }}" placeholder="e.g. LAX"></label>
+    <label>Date<br><input type="date" name="date" value="{{ date }}"></label>
+    <button type="submit">Filter</button>
+    <a href="?">Reset</a>
+</form>
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Route</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Price</th>
+            <th>Available</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for flight in flights %}
+        <tr>
+            <td>{{ flight.number }}</td>
+            <td>{{ flight.origin.code }} → {{ flight.destination.code }}</td>
+            <td>{{ flight.departure_time|localtime }}</td>
+            <td>{{ flight.arrival_time|localtime }}</td>
+            <td>${{ flight.price }}</td>
+            <td>{{ flight.available_seats }}</td>
+            <td><a href="{% url 'flight_detail' flight.pk %}">Book</a></td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="7">No upcoming flights.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

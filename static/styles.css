@@ -1,0 +1,7 @@
+body { font-family: system-ui, Arial, sans-serif; margin: 0; padding: 0; }
+header { background: #0b5; color: white; padding: 12px 16px; display:flex; align-items:center; gap:24px; }
+header a { color: white; text-decoration: none; margin-right: 12px; }
+main { padding: 16px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+button { padding: 8px 12px; }

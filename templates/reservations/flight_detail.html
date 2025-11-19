@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Flight {{ flight.number }}{% endblock %}
+{% block content %}
+<h2>Flight {{ flight.number }}</h2>
+<p>{{ flight.origin.code }} → {{ flight.destination.code }}</p>
+<p>Departs: {{ flight.departure_time }}</p>
+<p>Arrives: {{ flight.arrival_time }}</p>
+<p>Price: ${{ flight.price }}</p>
+
+<h3>Book Seats</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Confirm Booking</button>
+    {% if form.errors %}
+    <div style="color:red">Please fix the errors above.</div>
+    {% endif %}
+  </form>
+{% endblock %}
