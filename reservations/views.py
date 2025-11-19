@@ -38,6 +38,9 @@ def flight_detail(request, pk):
         initial = {"name": getattr(request.user, "get_full_name", lambda: request.user.username)(), "email": request.user.email or ""}
     form = BookingForm(request.POST or None, initial=initial)
 
+    if request.method == "POST" and not request.user.is_authenticated:
+        return redirect(f"{reverse('login')}?next={request.path}")
+
     if request.method == "POST" and form.is_valid():
         name = form.cleaned_data["name"]
         email = form.cleaned_data["email"]
