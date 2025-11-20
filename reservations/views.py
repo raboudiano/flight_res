@@ -66,14 +66,16 @@ def booking_success(request, pk):
     booking = get_object_or_404(Booking, pk=pk)
     return render(request, "reservations/booking_success.html", {"booking": booking})
 
+from .forms import CustomUserCreationForm
 
 def register(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect("flight_list")
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
+
     return render(request, "reservations/register.html", {"form": form})

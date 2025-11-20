@@ -11,7 +11,7 @@
     <header>
         <h1><a href="/">Flight Reservation</a></h1>
         <nav>
-            <a href="/">Flights</a>
+            <a href="/flights/">Flights</a>
             <a href="/admin/">Admin</a>
             {% if request.user.is_authenticated %}
                 <span>Hi, {{ request.user.username }}</span>
