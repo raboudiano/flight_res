@@ -9,7 +9,9 @@ urlpatterns = [
     path('apartments/', views.room, name='room'),
     path('amenities/', views.amenities, name='amenities'),
     path('hotel-booking/', views.booking_page, name='booking_page'),
-    path('contact/', views.contact, name='contact'),
+    
+    path('contact/', views.contact_view, name='contact'),
+    path('contact/success/', views.contact_success, name='contact_success'),
     
     # Authentication
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),

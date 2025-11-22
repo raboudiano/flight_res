@@ -1,41 +1,218 @@
-{% extends 'base.html' %}
+{% extends 'base_template/base.html' %}
+{% load static %}
 {% load tz %}
-{% block title %}Flights{% endblock %}
+{% block title %}Available Flights - SKY TRAVEL{% endblock %}
+
 {% block content %}
-<h2>Available Flights</h2>
-<form method="get" style="margin-bottom:12px; display:flex; gap:8px; align-items:end;">
-    <label>Origin<br><input type="text" name="origin" value="{{ origin }}" placeholder="e.g. JFK"></label>
-    <label>Destination<br><input type="text" name="destination" value="{{ destination }}" placeholder="e.g. LAX"></label>
-    <label>Date<br><input type="date" name="date" value="{{ date }}"></label>
-    <button type="submit">Filter</button>
-    <a href="?">Reset</a>
-</form>
-<table>
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Route</th>
-            <th>Departure</th>
-            <th>Arrival</th>
-            <th>Price</th>
-            <th>Available</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for flight in flights %}
-        <tr>
-            <td>{{ flight.number }}</td>
-            <td>{{ flight.origin.code }} → {{ flight.destination.code }}</td>
-            <td>{{ flight.departure_time|localtime }}</td>
-            <td>{{ flight.arrival_time|localtime }}</td>
-            <td>${{ flight.price }}</td>
-            <td>{{ flight.available_seats }}</td>
-            <td><a href="{% url 'flight_detail' flight.pk %}">Book</a></td>
-        </tr>
-    {% empty %}
-        <tr><td colspan="7">No upcoming flights.</td></tr>
-    {% endfor %}
-    </tbody>
-</table>
+<div class="container mt-4" style="padding-top: 80px;">
+    <!-- Header Section -->
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h1 class="display-4 mb-3">Find Your Perfect Flight</h1>
+            <p class="lead text-muted">Search and book from our wide selection of available flights</p>
+        </div>
+    </div>
+
+    <!-- Search Filter Card -->
+    <div class="card shadow-sm mb-5">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0"><i class="fas fa-search me-2"></i>Search Flights</h5>
+        </div>
+        <div class="card-body">
+            <form method="get" class="row g-3 align-items-end">
+                <div class="col-md-3">
+                    <label class="form-label fw-bold">From</label>
+                    <input type="text" name="origin" value="{{ origin }}" class="form-control" placeholder="e.g. JFK, LHR, CDG">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-bold">To</label>
+                    <input type="text" name="destination" value="{{ destination }}" class="form-control" placeholder="e.g. LAX, NBE, TUN">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-bold">Departure Date</label>
+                    <input type="date" name="date" value="{{ date }}" class="form-control">
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search me-2"></i>Search Flights
+                    </button>
+                    <a href="?" class="btn btn-outline-secondary w-100 mt-2">Reset Filters</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Results Count -->
+    {% if flights %}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Available Flights ({{ flights|length }})</h4>
+        <div class="text-muted">
+            <small>All times are displayed in your local timezone</small>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Flights Table -->
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            {% if flights %}
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Flight #</th>
+                            <th>Route</th>
+                            <th>Departure</th>
+                            <th>Arrival</th>
+                            <th>Duration</th>
+                            <th>Price</th>
+                            <th>Seats</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for flight in flights %}
+                        <tr>
+                            <td>
+                                <strong class="text-primary">{{ flight.number }}</strong>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="text-center">
+                                        <strong>{{ flight.origin.code }}</strong>
+                                        <div class="text-muted small">{{ flight.origin.city }}</div>
+                                    </div>
+                                    <div class="mx-3">
+                                        <i class="fas fa-arrow-right text-muted"></i>
+                                    </div>
+                                    <div class="text-center">
+                                        <strong>{{ flight.destination.code }}</strong>
+                                        <div class="text-muted small">{{ flight.destination.city }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <strong>{{ flight.departure_time|localtime|date:"M d, Y" }}</strong>
+                                <div class="text-muted small">{{ flight.departure_time|localtime|time:"H:i" }}</div>
+                            </td>
+                            <td>
+                                <strong>{{ flight.arrival_time|localtime|date:"M d, Y" }}</strong>
+                                <div class="text-muted small">{{ flight.arrival_time|localtime|time:"H:i" }}</div>
+                            </td>
+                            <td>
+                                {% with duration=flight.arrival_time|timeuntil:flight.departure_time %}
+                                <span class="badge bg-light text-dark">{{ duration }}</span>
+                                {% endwith %}
+                            </td>
+                            <td>
+                                <strong class="text-success">${{ flight.price }}</strong>
+                                <div class="text-muted small">per seat</div>
+                            </td>
+                            <td>
+                                {% if flight.available_seats > 5 %}
+                                    <span class="badge bg-success">{{ flight.available_seats }} available</span>
+                                {% elif flight.available_seats > 0 %}
+                                    <span class="badge bg-warning text-dark">{{ flight.available_seats }} left</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Sold out</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if flight.available_seats > 0 %}
+                                <a href="{% url 'flight_detail' flight.pk %}" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-ticket-alt me-1"></i>Book Now
+                                </a>
+                                {% else %}
+                                <button class="btn btn-secondary btn-sm" disabled>Sold Out</button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <!-- No Results Message -->
+            <div class="text-center py-5">
+                <i class="fas fa-plane-slash fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No Flights Found</h4>
+                <p class="text-muted mb-4">We couldn't find any flights matching your criteria.</p>
+                <a href="?" class="btn btn-primary">View All Flights</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Quick Tips Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-4 mb-3 mb-md-0">
+                            <i class="fas fa-shield-alt text-primary fa-2x mb-2"></i>
+                            <h6>Secure Booking</h6>
+                            <p class="text-muted small">Your payment and personal information are always protected</p>
+                        </div>
+                        <div class="col-md-4 mb-3 mb-md-0">
+                            <i class="fas fa-headset text-primary fa-2x mb-2"></i>
+                            <h6>24/7 Support</h6>
+                            <p class="text-muted small">Our travel experts are available around the clock</p>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fas fa-tag text-primary fa-2x mb-2"></i>
+                            <h6>Best Price Guarantee</h6>
+                            <p class="text-muted small">Found a lower price? We'll match it!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.table th {
+    border-top: none;
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table td {
+    vertical-align: middle;
+    padding: 1rem 0.75rem;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
+.card-header {
+    border-radius: 12px 12px 0 0 !important;
+}
+
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #e1e5e9;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.1);
+}
+
+.badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+</style>
 {% endblock %}

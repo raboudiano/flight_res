@@ -13,6 +13,21 @@
                 Have questions about your flight booking? Our travel experts are here to help you plan your perfect journey.
             </p>
         </div>
+        
+        <!-- Display Messages -->
+        {% if messages %}
+        <div class="row">
+            <div class="col-md-12">
+                {% for message in messages %}
+                <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
         <div class="row">
             <div class="col-md-12">
                 <div class="row contact-info">
@@ -41,32 +56,60 @@
             </div>
             <div class="col-md-12">
                 <div class="contact-form">
-                    <div id="success"></div>
-                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        
                         <div class="form-row">
                             <div class="control-group col-sm-6">
-                                <label>Your Name</label>
-                                <input type="text" class="form-control" id="name" placeholder="E.g. John Sina" required="required" data-validation-required-message="Please enter your name" />
-                                <p class="help-block text-danger"></p>
+                                <label for="{{ form.name.id_for_label }}">Your Name</label>
+                                {{ form.name }}
+                                {% if form.name.errors %}
+                                    <div class="help-block text-danger">
+                                        {% for error in form.name.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
                             <div class="control-group col-sm-6">
-                                <label>Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="E.g. email@example.com" required="required" data-validation-required-message="Please enter your email" />
-                                <p class="help-block text-danger"></p>
+                                <label for="{{ form.email.id_for_label }}">Email</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <div class="help-block text-danger">
+                                        {% for error in form.email.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
+                        
                         <div class="control-group">
-                            <label>Subject</label>
-                            <input type="text" class="form-control" id="subject" placeholder="E.g. Flight Booking Inquiry" required="required" data-validation-required-message="Please enter a subject" />
-                            <p class="help-block text-danger"></p>
+                            <label for="{{ form.subject.id_for_label }}">Subject</label>
+                            {{ form.subject }}
+                            {% if form.subject.errors %}
+                                <div class="help-block text-danger">
+                                    {% for error in form.subject.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
+                        
                         <div class="control-group">
-                            <label>Message</label> 
-                            <textarea class="form-control" id="message" rows="5" placeholder="E.g. I need help with my flight booking to Paris..." required="required" data-validation-required-message="Please enter your message"></textarea>
-                            <p class="help-block text-danger"></p>
+                            <label for="{{ form.message.id_for_label }}">Message</label> 
+                            {{ form.message }}
+                            {% if form.message.errors %}
+                                <div class="help-block text-danger">
+                                    {% for error in form.message.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
+                        
                         <div class="button text-center">
-                            <button type="submit" id="sendMessageButton" class="btn btn-primary btn-lg">Send Message</button>
+                            <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
                         </div>
                     </form>
                 </div>

@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import Sum, F, Q
 from django.conf import settings
-
+from django.utils import timezone
 
 class Airport(models.Model):
     code = models.CharField(max_length=10, unique=True)
@@ -59,3 +59,21 @@ class Booking(models.Model):
 
     def __str__(self):
         return f"Booking #{self.id} for {self.flight.number}"
+
+
+# ADD THIS CONTACT MODEL
+class ContactSubmission(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    submitted_at = models.DateTimeField(default=timezone.now)
+    is_resolved = models.BooleanField(default=False)
+    
+    class Meta:
+        verbose_name = "Contact Submission"
+        verbose_name_plural = "Contact Submissions"
+        ordering = ['-submitted_at']
+    
+    def __str__(self):
+        return f"{self.name} - {self.subject} ({self.submitted_at.date()})"

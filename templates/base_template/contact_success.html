@@ -1,0 +1,24 @@
+{% extends 'base_template/base.html' %}
+{% load static %}
+
+{% block title %}Message Sent - SKY TRAVEL{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="card shadow">
+                <div class="card-body p-5">
+                    <i class="fas fa-check-circle fa-5x text-success mb-4"></i>
+                    <h2 class="mb-3">Message Sent Successfully!</h2>
+                    <p class="lead mb-4">Thank you for contacting us. We'll get back to you as soon as possible.</p>
+                    <div class="d-grid gap-2 d-md-block">
+                        <a href="{% url 'home' %}" class="btn btn-primary">Return Home</a>
+                        <a href="{% url 'contact' %}" class="btn btn-outline-primary">Send Another Message</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,168 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>LOFT CITY | Responsive Travel & Tourism Template</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="" name="keywords">
-        <meta content="" name="description">
+{% extends 'base_template/base.html' %}
+{% load static %}
 
-        <!-- Favicons -->
-        <link href="img/favicon.ico" rel="icon">
-        <link href="img/apple-favicon.png" rel="apple-touch-icon">
+{% block title %}About Us - SKY TRAVEL{% endblock %}
 
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Raleway:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-
-        <!-- Vendor CSS File -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <link href="vendor/slick/slick.css" rel="stylesheet">
-        <link href="vendor/slick/slick-theme.css" rel="stylesheet">
-        <link href="vendor/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
-        <!-- Main Stylesheet File -->
-        <link href="css/hover-style.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-
-    <body>
-        <!-- Header Section Start -->
-        <header id="header">
-            <a href="index.html" class="logo"><img src="img/logo.png" alt="logo"></a>
-            <div class="phone"><i class="fa fa-phone"></i>+1 234 567 8900</div>
-            <div class="mobile-menu-btn"><i class="fa fa-bars"></i></div>
-            <nav class="main-menu top-menu">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li class="active"><a href="about.html">About Us</a></li>
-                    <li><a href="room.html">Apartments</a></li>
-                    <li><a href="amenities.html">Amenities</a></li>
-                    <li><a href="booking.html">Booking</a></li>
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-            </nav>
-        </header>
-        <!-- Header Section End -->
+{% block content %}
+<!-- About Section Start -->
+<div id="about" style="margin-top: 80px; padding: 80px 0;">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h2>About Sky Travel</h2>
+            <p class="lead">
+                Your trusted partner for seamless flight bookings and unforgettable travel experiences around the world.
+            </p>
+        </div>
         
-        <!-- About Section Start -->
-        <div id="about">
-            <div class="container">
-                <div class="section-header">
-                    <h2>About Loft City</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in mi libero. Quisque convallis, enim at venenatis tincidunt.
+        <!-- Our Story -->
+        <div class="row align-items-center mb-5">
+            <div class="col-md-12 content-cols">
+                <div class="content-col">
+                    <h3 class="mb-4">Our Story</h3>
+                    <p class="mb-3">
+                        Founded in 2015, Sky Travel has been connecting travelers to their dream destinations with ease and reliability. 
                     </p>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 img-cols">
-                        <div class="img-col">
-                            <img class="img-fluid" src="img/about/about-1.jpg">
-                        </div>
-                    </div>
-                    <div class="col-md-6 content-cols">
-                        <div class="content-col">
-                            <h3>Lorem ipsum dolor</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam velit orci, tincidunt sit amet arcu eu, iaculis malesuada lectus. Sed non lectus at libero vulputate commodo egestas eu nulla. Praesent pretium nisi eu arcu auctor, id tincidunt mi porta. Sed sodales sagittis elit a mattis. Duis cursus ipsum sed placerat hendrerit.
-                            </p>
-                            <a href="#">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-6 img-cols d-block d-md-none">
-                        <div class="img-col">
-                            <img class="img-fluid" src="img/about/about-2.jpg">
-                        </div>
-                    </div>
-                    <div class="col-md-6 content-cols">
-                        <div class="content-col">
-                            <h3>Lorem ipsum dolor</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam velit orci, tincidunt sit amet arcu eu, iaculis malesuada lectus. Sed non lectus at libero vulputate commodo egestas eu nulla. Praesent pretium nisi eu arcu auctor, id tincidunt mi porta. Sed sodales sagittis elit a mattis. Duis cursus ipsum sed placerat hendrerit.
-                            </p>
-                            <a href="#">Learn More</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 img-cols d-none d-md-block">
-                        <div class="img-col">
-                            <img class="img-fluid" src="img/about/about-2.jpg">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-6 img-cols">
-                        <div class="img-col">
-                            <img class="img-fluid" src="img/about/about-3.jpg">
-                        </div>
-                    </div>
-                    <div class="col-md-6 content-cols">
-                        <div class="content-col">
-                            <h3>Lorem ipsum dolor</h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam velit orci, tincidunt sit amet arcu eu, iaculis malesuada lectus. Sed non lectus at libero vulputate commodo egestas eu nulla. Praesent pretium nisi eu arcu auctor, id tincidunt mi porta. Sed sodales sagittis elit a mattis. Duis cursus ipsum sed placerat hendrerit.
-                            </p>
-                            <a href="#">Learn More</a>
-                        </div>
-                    </div>
+                    <p class="mb-3">
+                        What started as a small local agency has grown into a trusted platform serving thousands of customers worldwide.
+                    </p>
+                    <p class="mb-4">
+                        We believe that travel should be accessible, enjoyable, and stress-free. Our mission is to make flight booking 
+                        simple while providing exceptional service every step of the way.
+                    </p>
+                    <a href="{% url 'contact' %}" class="btn btn-primary">Get in Touch</a>
                 </div>
             </div>
         </div>
-        <!-- About Section End -->
         
-        <!-- Footer Section Start -->
-        <div id="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="social">
-                            <a href=""><li class="fa fa-instagram"></li></a>
-                            <a href=""><li class="fa fa-twitter"></li></a>
-                            <a href=""><li class="fa fa-facebook-f"></li></a>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <ul>
-                            <li><a href="">Home</a></li>
-                            <li><a href="">About</a></li>
-                            <li><a href="">Terms</a></li>
-                            <li><a href="">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-12">
-                        <p>Copyright &#169; <a href="https://htmlcodex.com">HTML Codex</a> All Rights Reserved.</p>
-						<p>Template By <a href="https://htmlcodex.com">HTML Codex</a></p>
-                    </div>
+        <!-- Our Mission -->
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6 img-cols d-block d-md-none mb-4">
+                <div class="img-col">
+                    <img class="img-fluid rounded" src="{% static 'img/about/about-2.jpg' %}" alt="Our Mission">
+                </div>
+            </div>
+            <div class="col-md-6 content-cols">
+                <div class="content-col">
+                    <h3 class="mb-4">Our Mission</h3>
+                    <p class="mb-3">
+                        To revolutionize the way people book flights by providing a seamless, transparent, and customer-centric platform 
+                        that offers the best prices and unparalleled service.
+                    </p>
+                    <p class="mb-4">
+                        We're committed to making air travel more accessible while maintaining the highest standards of safety, 
+                        reliability, and customer satisfaction.
+                    </p>
+                    <a href="{% url 'flight_list' %}" class="btn btn-primary">Book Your Flight</a>
+                </div>
+            </div>
+            <div class="col-md-6 img-cols d-none d-md-block">
+                <div class="img-col">
+                    <img class="img-fluid rounded" src="{% static 'img/about/about-2.jpg' %}" alt="Our Mission">
                 </div>
             </div>
         </div>
-        <!-- Footer Section End -->
         
-        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        <!-- Why Choose Us -->
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6 img-cols mb-4 mb-md-0">
+                <div class="img-col">
+                    <img class="img-fluid rounded" src="{% static 'img/about/about-3.jpg' %}" alt="Why Choose Sky Travel">
+                </div>
+            </div>
+            <div class="col-md-6 content-cols">
+                <div class="content-col">
+                    <h3 class="mb-4">Why Choose Sky Travel?</h3>
+                    <p class="mb-3">
+                        With over 8 years of experience in the travel industry, we've built a reputation for excellence and reliability. 
+                        Our team of travel experts is dedicated to finding you the best flights at the best prices.
+                    </p>
+                    <p class="mb-4">
+                        We partner with major airlines worldwide to offer you extensive options and competitive pricing. 
+                        Your journey is our priority, from the moment you book until you reach your destination.
+                    </p>
+                    <a href="{% url 'register' %}" class="btn btn-primary">Join Today</a>
+                </div>
+            </div>
+        </div>
 
-        <!-- Vendor JavaScript File -->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/jquery/jquery-migrate.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="vendor/easing/easing.min.js"></script>
-        <script src="vendor/stickyjs/sticky.js"></script>
-        <script src="vendor/superfish/hoverIntent.js"></script>
-        <script src="vendor/superfish/superfish.min.js"></script>
-        <script src="vendor/wow/wow.min.js"></script>
-        <script src="vendor/slick/slick.min.js"></script>
-        <script src="vendor/tempusdominus/js/moment.min.js"></script>
-        <script src="vendor/tempusdominus/js/moment-timezone.min.js"></script>
-        <script src="vendor/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-        
-        <!-- Booking Javascript File -->
-        <script src="js/booking.js"></script>
-        <script src="js/jqBootstrapValidation.min.js"></script>
-  
-        <!-- Main Javascript File -->
-        <script src="js/main.js"></script>
-    </body>
-</html>
+        <!-- Stats Section -->
+        <div class="row mt-5 pt-5">
+            <div class="col-12">
+                <div class="section-header text-center mb-5">
+                    <h3>Our Achievements</h3>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-item">
+                            <h2 class="text-primary mb-2">50K+</h2>
+                            <p class="mb-0">Happy Travelers</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-item">
+                            <h2 class="text-primary mb-2">500+</h2>
+                            <p class="mb-0">Destinations</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-item">
+                            <h2 class="text-primary mb-2">24/7</h2>
+                            <p class="mb-0">Customer Support</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="stat-item">
+                            <h2 class="text-primary mb-2">98%</h2>
+                            <p class="mb-0">Satisfaction Rate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Values Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="section-header text-center mb-5">
+                    <h3>Our Values</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 text-center mb-4">
+                        <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                        <h5 class="mb-3">Safety First</h5>
+                        <p class="text-muted mb-0">Your security and comfort are our top priorities in every journey.</p>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <i class="fas fa-hand-holding-usd fa-3x text-primary mb-3"></i>
+                        <h5 class="mb-3">Best Prices</h5>
+                        <p class="text-muted mb-0">Guaranteed competitive pricing with no hidden fees.</p>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <i class="fas fa-headset fa-3x text-primary mb-3"></i>
+                        <h5 class="mb-3">24/7 Support</h5>
+                        <p class="text-muted mb-0">Round-the-clock assistance for all your travel needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About Section End -->
+{% endblock %}

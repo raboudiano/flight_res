@@ -6,6 +6,7 @@ from django.contrib.auth import login
 from .models import Flight, Passenger, Booking
 from django.db.models import Sum
 from .forms import BookingForm, CustomUserCreationForm
+from .forms import ContactForm
 
 
 
@@ -113,3 +114,38 @@ def register(request):
         form = CustomUserCreationForm()
 
     return render(request, "registration/register.html", {"form": form})
+
+
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .forms import ContactForm
+from .models import ContactSubmission
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Save to database
+            contact_submission = form.save()
+            
+            # You can also send email here if needed
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            
+            # Send email functionality (optional)
+            # send_contact_email(name, email, subject, message)
+            
+            messages.success(request, f'Thank you {name}! Your message has been sent successfully. We will get back to you within 2 hours.')
+            return redirect('contact')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = ContactForm()
+    
+    return render(request, 'base_template/contact.html', {'form': form})
+
+def contact_success(request):
+    return render(request, 'contact_success.html')

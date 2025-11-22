@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Airport, Flight, Passenger, Booking
+from .models import Airport, Flight, Passenger, Booking, ContactSubmission
 
 
 @admin.register(Airport)
@@ -25,3 +25,22 @@ class PassengerAdmin(admin.ModelAdmin):
 class BookingAdmin(admin.ModelAdmin):
     list_display = ("id", "flight", "passenger", "user", "seats", "booked_at")
     list_filter = ("flight", "user")
+
+
+# ADD THIS FOR CONTACT SUBMISSIONS
+@admin.register(ContactSubmission)
+class ContactSubmissionAdmin(admin.ModelAdmin):
+    list_display = ("name", "email", "subject", "submitted_at", "is_resolved")
+    list_filter = ("is_resolved", "submitted_at")
+    search_fields = ("name", "email", "subject", "message")
+    list_editable = ("is_resolved",)
+    readonly_fields = ("submitted_at",)
+    
+    fieldsets = (
+        ("Contact Information", {
+            "fields": ("name", "email", "subject", "message")
+        }),
+        ("Status", {
+            "fields": ("submitted_at", "is_resolved")
+        }),
+    )
