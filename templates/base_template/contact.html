@@ -1,0 +1,128 @@
+{% extends 'base_template/base.html' %}
+{% load static %}
+
+{% block title %}Contact Us - SKY TRAVEL{% endblock %}
+
+{% block content %}
+<!-- Contact Section Start -->
+<div id="contact" style="margin-top: 80px; padding: 80px 0;">
+    <div class="container">
+        <div class="section-header">
+            <h2>Contact Sky Travel</h2>
+            <p>
+                Have questions about your flight booking? Our travel experts are here to help you plan your perfect journey.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row contact-info">
+                    <div class="col-md-4">
+                        <div class="info-item">
+                            <i class="fa fa-map-marker"></i>
+                            <h3>Address</h3>
+                            <p>rue al kodes,dar chaabane, nabeul</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="info-item">
+                            <i class="fa fa-envelope"></i>
+                            <h3>E-mail</h3>
+                            <p><a href="mailto:info@skytravel.com">dreamteam@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="info-item">
+                            <i class="fa fa-phone"></i>
+                            <h3>24/7 Support</h3>
+                            <p><a href="tel:+12345678900">+216 59389339</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="contact-form">
+                    <div id="success"></div>
+                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                        <div class="form-row">
+                            <div class="control-group col-sm-6">
+                                <label>Your Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="E.g. John Sina" required="required" data-validation-required-message="Please enter your name" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group col-sm-6">
+                                <label>Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="E.g. email@example.com" required="required" data-validation-required-message="Please enter your email" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label>Subject</label>
+                            <input type="text" class="form-control" id="subject" placeholder="E.g. Flight Booking Inquiry" required="required" data-validation-required-message="Please enter a subject" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label>Message</label> 
+                            <textarea class="form-control" id="message" rows="5" placeholder="E.g. I need help with my flight booking to Paris..." required="required" data-validation-required-message="Please enter your message"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="button text-center">
+                            <button type="submit" id="sendMessageButton" class="btn btn-primary btn-lg">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Additional Contact Info -->
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="section-header">
+                    <h3>Why Contact Sky Travel?</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 text-center mb-4">
+                        <i class="fas fa-clock fa-2x text-primary mb-3"></i>
+                        <h5>24/7 Customer Support</h5>
+                        <p class="text-muted">Round-the-clock assistance for all your travel needs</p>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <i class="fas fa-headset fa-2x text-primary mb-3"></i>
+                        <h5>Expert Travel Advice</h5>
+                        <p class="text-muted">Get personalized recommendations from our travel experts</p>
+                    </div>
+                    <div class="col-md-4 text-center mb-4">
+                        <i class="fas fa-shield-alt fa-2x text-primary mb-3"></i>
+                        <h5>Secure Booking Assistance</h5>
+                        <p class="text-muted">Safe and secure help with all your flight bookings</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact Section End -->
+
+<!-- Business Hours Section -->
+<div id="business-hours" style="background: #f8f9fa; padding: 60px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto text-center">
+                <h3 class="mb-4">Customer Service Hours</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Phone Support</h5>
+                        <p class="text-muted">24/7 Available</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Email Support</h5>
+                        <p class="text-muted">Response within 2 hours</p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <p class="lead">We're here to make your travel experience seamless and enjoyable!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -5,10 +5,42 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from .models import Flight, Passenger, Booking
 from django.db.models import Sum
-from .forms import BookingForm
+from .forms import BookingForm, CustomUserCreationForm
+
+
+
+def home(request):
+    """Home page with the hotel template"""
+    return render(request, "base_template/index.html")
+
+
+def about(request):
+    """About page"""
+    return render(request, "base_template/about.html")
+
+
+def room(request):
+    """Apartments/Rooms page"""
+    return render(request, "base_template/room.html")
+
+
+def amenities(request):
+    """Amenities page"""
+    return render(request, "base_template/amenities.html")
+
+
+def booking_page(request):
+    """Booking page (hotel template)"""
+    return render(request, "base_template/booking.html")
+
+
+def contact(request):
+    """Contact page"""
+    return render(request, "base_template/contact.html")
 
 
 def flight_list(request):
+    """Flight list page - your existing functionality"""
     flights = Flight.objects.filter(departure_time__gte=timezone.now())
 
     origin = request.GET.get("origin")
@@ -32,6 +64,7 @@ def flight_list(request):
 
 
 def flight_detail(request, pk):
+    """Flight detail page - your existing functionality"""
     flight = get_object_or_404(Flight, pk=pk)
     initial = None
     if request.user.is_authenticated:
@@ -63,12 +96,13 @@ def flight_detail(request, pk):
 
 
 def booking_success(request, pk):
+    """Booking success page"""
     booking = get_object_or_404(Booking, pk=pk)
     return render(request, "reservations/booking_success.html", {"booking": booking})
 
-from .forms import CustomUserCreationForm
 
 def register(request):
+    """User registration"""
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
@@ -78,4 +112,4 @@ def register(request):
     else:
         form = CustomUserCreationForm()
 
-    return render(request, "reservations/register.html", {"form": form})
+    return render(request, "registration/register.html", {"form": form})

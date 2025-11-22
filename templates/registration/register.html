@@ -1,0 +1,142 @@
+{% extends 'base_template/base.html' %}
+{% load static %}
+
+{% block title %}Register - SKY TRAVEL{% endblock %}
+
+{% block content %}
+<div style="margin-top: 100px; padding: 80px 0;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-body p-5">
+                        <h2 class="text-center mb-4">Join Sky Travel</h2>
+                        <p class="text-center text-muted mb-4">Create your account to start booking flights</p>
+
+                        <!-- Messages Display -->
+                        {% if messages %}
+                        <div class="mb-4">
+                            {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <!-- Form Errors -->
+                        {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Please correct the following errors:</strong>
+                            <ul class="mb-0">
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                        <form method="POST">
+                            {% csrf_token %}
+                            
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="id_username">Username *</label>
+                                    <input type="text" name="username" class="form-control" id="id_username" 
+                                           value="{{ form.username.value|default:'' }}" required
+                                           placeholder="Choose a username">
+                                    {% if form.username.help_text %}
+                                    <small class="form-text text-muted">{{ form.username.help_text }}</small>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="id_email">Email Address *</label>
+                                    <input type="email" name="email" class="form-control" id="id_email" 
+                                           value="{{ form.email.value|default:'' }}" required
+                                           placeholder="your@email.com">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="id_first_name">First Name</label>
+                                    <input type="text" name="first_name" class="form-control" id="id_first_name" 
+                                           value="{{ form.first_name.value|default:'' }}"
+                                           placeholder="Your first name">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="id_last_name">Last Name</label>
+                                    <input type="text" name="last_name" class="form-control" id="id_last_name" 
+                                           value="{{ form.last_name.value|default:'' }}"
+                                           placeholder="Your last name">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="id_password1">Password *</label>
+                                    <input type="password" name="password1" class="form-control" id="id_password1" required
+                                           placeholder="Create a password">
+                                    {% if form.password1.help_text %}
+                                    <small class="form-text text-muted">{{ form.password1.help_text }}</small>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="id_password2">Confirm Password *</label>
+                                    <input type="password" name="password2" class="form-control" id="id_password2" required
+                                           placeholder="Repeat your password">
+                                </div>
+                            </div>
+
+                            <div class="form-group text-center mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg px-5">Create Account</button>
+                            </div>
+                        </form>
+
+                        <div class="text-center mt-4">
+                            <p class="mb-0">Already have an account? <a href="{% url 'login' %}" class="font-weight-bold">Sign in here</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Benefits Section -->
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h4 class="text-center mb-4">Why Join Sky Travel?</h4>
+                        <div class="row">
+                            <div class="col-md-3 text-center mb-4">
+                                <i class="fas fa-plane fa-2x text-primary mb-3"></i>
+                                <h6>Quick Booking</h6>
+                                <small class="text-muted">Book flights faster with saved details</small>
+                            </div>
+                            <div class="col-md-3 text-center mb-4">
+                                <i class="fas fa-history fa-2x text-primary mb-3"></i>
+                                <h6>Booking History</h6>
+                                <small class="text-muted">Access all your past flights</small>
+                            </div>
+                            <div class="col-md-3 text-center mb-4">
+                                <i class="fas fa-tag fa-2x text-primary mb-3"></i>
+                                <h6>Exclusive Deals</h6>
+                                <small class="text-muted">Member-only discounts</small>
+                            </div>
+                            <div class="col-md-3 text-center mb-4">
+                                <i class="fas fa-bell fa-2x text-primary mb-3"></i>
+                                <h6>Flight Alerts</h6>
+                                <small class="text-muted">Real-time flight updates</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
