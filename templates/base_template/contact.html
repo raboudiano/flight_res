@@ -4,8 +4,157 @@
 {% block title %}Contact Us - SKY TRAVEL{% endblock %}
 
 {% block content %}
+<style>
+    /* Contact page specific styles */
+    #contact {
+        margin-top: 80px !important;
+        padding: 80px 0 !important;
+        background-color: #fff;
+    }
+    
+    .section-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    
+    .section-header h2 {
+        color: #333;
+        font-weight: 700;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .section-header h3 {
+        color: #333;
+        font-weight: 700;
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .section-header p {
+        color: #666;
+        font-size: 1.1rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .contact-info {
+        margin-bottom: 50px;
+    }
+    
+    .info-item {
+        text-align: center;
+        padding: 30px 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .info-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    
+    .info-item i {
+        font-size: 2.5rem;
+        color: #007bff;
+        margin-bottom: 20px;
+    }
+    
+    .info-item h3 {
+        color: #333;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+    
+    .info-item p {
+        color: #666;
+        margin-bottom: 0;
+        font-size: 1rem;
+    }
+    
+    .info-item a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    
+    .info-item a:hover {
+        text-decoration: underline;
+    }
+    
+    .contact-form {
+        background: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    }
+    
+    .contact-form label {
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: block;
+    }
+    
+    .contact-form .form-control,
+    .contact-form textarea {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+    
+    .contact-form .form-control:focus,
+    .contact-form textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        outline: none;
+    }
+    
+    .contact-form textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+    
+    .help-block {
+        margin-top: 5px;
+        font-size: 0.875rem;
+    }
+    
+    .button {
+        margin-top: 20px;
+    }
+    
+    #business-hours {
+        background: #f8f9fa !important;
+        padding: 60px 0 !important;
+    }
+    
+    #business-hours h3 {
+        color: #333;
+        font-weight: 700;
+        font-size: 2rem;
+    }
+    
+    #business-hours h5 {
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    
+    .feature-icon {
+        transition: transform 0.3s ease;
+    }
+    
+    .feature-icon:hover {
+        transform: scale(1.1);
+    }
+</style>
+
 <!-- Contact Section Start -->
-<div id="contact" style="margin-top: 80px; padding: 80px 0;">
+<div id="contact">
     <div class="container">
         <div class="section-header">
             <h2>Contact Sky Travel</h2>
@@ -17,50 +166,52 @@
         <!-- Display Messages -->
         {% if messages %}
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mb-4">
                 {% for message in messages %}
                 <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
                     {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 {% endfor %}
             </div>
         </div>
         {% endif %}
         
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row contact-info">
-                    <div class="col-md-4">
-                        <div class="info-item">
-                            <i class="fa fa-map-marker"></i>
-                            <h3>Address</h3>
-                            <p>rue al kodes,dar chaabane, nabeul</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="info-item">
-                            <i class="fa fa-envelope"></i>
-                            <h3>E-mail</h3>
-                            <p><a href="mailto:info@skytravel.com">dreamteam@gmail.com</a></p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="info-item">
-                            <i class="fa fa-phone"></i>
-                            <h3>24/7 Support</h3>
-                            <p><a href="tel:+12345678900">+216 59389339</a></p>
-                        </div>
-                    </div>
+        <!-- Contact Info Cards -->
+        <div class="row contact-info">
+            <div class="col-md-4">
+                <div class="info-item">
+                    <i class="fa fa-map-marker"></i>
+                    <h3>Address</h3>
+                    <p>Rue Al Kodes, Dar Chaabane<br>Nabeul, Tunisia</p>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="info-item">
+                    <i class="fa fa-envelope"></i>
+                    <h3>E-mail</h3>
+                    <p><a href="mailto:dreamteam@gmail.com">dreamteam@gmail.com</a></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="info-item">
+                    <i class="fa fa-phone"></i>
+                    <h3>24/7 Support</h3>
+                    <p><a href="tel:+21659389339">+216 59 389 339</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Form -->
+        <div class="row">
+            <div class="col-md-10 mx-auto">
                 <div class="contact-form">
+                    <h3 class="text-center mb-4">Send Us a Message</h3>
                     <form method="post" novalidate>
                         {% csrf_token %}
                         
-                        <div class="form-row">
-                            <div class="control-group col-sm-6">
+                        <div class="form-row row">
+                            <div class="control-group col-sm-6 mb-3">
                                 <label for="{{ form.name.id_for_label }}">Your Name</label>
                                 {{ form.name }}
                                 {% if form.name.errors %}
@@ -71,7 +222,7 @@
                                     </div>
                                 {% endif %}
                             </div>
-                            <div class="control-group col-sm-6">
+                            <div class="control-group col-sm-6 mb-3">
                                 <label for="{{ form.email.id_for_label }}">Email</label>
                                 {{ form.email }}
                                 {% if form.email.errors %}
@@ -84,7 +235,7 @@
                             </div>
                         </div>
                         
-                        <div class="control-group">
+                        <div class="control-group mb-3">
                             <label for="{{ form.subject.id_for_label }}">Subject</label>
                             {{ form.subject }}
                             {% if form.subject.errors %}
@@ -96,7 +247,7 @@
                             {% endif %}
                         </div>
                         
-                        <div class="control-group">
+                        <div class="control-group mb-3">
                             <label for="{{ form.message.id_for_label }}">Message</label> 
                             {{ form.message }}
                             {% if form.message.errors %}
@@ -109,32 +260,38 @@
                         </div>
                         
                         <div class="button text-center">
-                            <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                            <button type="submit" class="btn btn-primary btn-lg px-5">Send Message</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
         
-        <!-- Additional Contact Info -->
-        <div class="row mt-5">
+        <!-- Why Contact Us Section -->
+        <div class="row mt-5 pt-5">
             <div class="col-md-12">
                 <div class="section-header">
                     <h3>Why Contact Sky Travel?</h3>
                 </div>
                 <div class="row">
                     <div class="col-md-4 text-center mb-4">
-                        <i class="fas fa-clock fa-2x text-primary mb-3"></i>
+                        <div class="feature-icon">
+                            <i class="fas fa-clock fa-3x text-primary mb-3"></i>
+                        </div>
                         <h5>24/7 Customer Support</h5>
                         <p class="text-muted">Round-the-clock assistance for all your travel needs</p>
                     </div>
                     <div class="col-md-4 text-center mb-4">
-                        <i class="fas fa-headset fa-2x text-primary mb-3"></i>
+                        <div class="feature-icon">
+                            <i class="fas fa-headset fa-3x text-primary mb-3"></i>
+                        </div>
                         <h5>Expert Travel Advice</h5>
                         <p class="text-muted">Get personalized recommendations from our travel experts</p>
                     </div>
                     <div class="col-md-4 text-center mb-4">
-                        <i class="fas fa-shield-alt fa-2x text-primary mb-3"></i>
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                        </div>
                         <h5>Secure Booking Assistance</h5>
                         <p class="text-muted">Safe and secure help with all your flight bookings</p>
                     </div>
@@ -146,26 +303,31 @@
 <!-- Contact Section End -->
 
 <!-- Business Hours Section -->
-<div id="business-hours" style="background: #f8f9fa; padding: 60px 0;">
+<div id="business-hours">
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto text-center">
                 <h3 class="mb-4">Customer Service Hours</h3>
                 <div class="row">
-                    <div class="col-md-6">
-                        <h5>Phone Support</h5>
-                        <p class="text-muted">24/7 Available</p>
+                    <div class="col-md-6 mb-3">
+                        <div class="p-3">
+                            <h5>Phone Support</h5>
+                            <p class="text-muted mb-0">Available 24/7</p>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <h5>Email Support</h5>
-                        <p class="text-muted">Response within 2 hours</p>
+                    <div class="col-md-6 mb-3">
+                        <div class="p-3">
+                            <h5>Email Support</h5>
+                            <p class="text-muted mb-0">Response within 2 hours</p>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-4">
-                    <p class="lead">We're here to make your travel experience seamless and enjoyable!</p>
+                    <p class="lead" style="color: #555;">We're here to make your travel experience seamless and enjoyable!</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- Business Hours Section End -->
 {% endblock %}

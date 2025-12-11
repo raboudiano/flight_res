@@ -5,32 +5,218 @@
 {% block title %}Book Flight {{ flight.number }} - SKY TRAVEL{% endblock %}
 
 {% block content %}
-<div class="container mt-4" style="padding-top: 80px;">
+<style>
+    /* Booking page specific styles */
+    .booking-container {
+        padding-top: 100px !important;
+        padding-bottom: 60px;
+    }
+    
+    .flight-header-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 15px;
+        color: white;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .flight-header-card h1 {
+        color: white;
+        font-weight: 700;
+    }
+    
+    .flight-route {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .airport-info {
+        text-align: center;
+    }
+    
+    .airport-code {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 5px;
+    }
+    
+    .airport-city {
+        color: rgba(255,255,255,0.9);
+        font-size: 0.9rem;
+    }
+    
+    .plane-icon {
+        margin: 0 30px;
+        color: rgba(255,255,255,0.8);
+    }
+    
+    .price-display {
+        text-align: center;
+    }
+    
+    .price-amount {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #ffd700;
+        margin-bottom: 5px;
+    }
+    
+    .price-label {
+        color: rgba(255,255,255,0.9);
+        font-size: 0.9rem;
+    }
+    
+    .details-card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        height: 100%;
+    }
+    
+    .card-header {
+        border-radius: 15px 15px 0 0 !important;
+        font-weight: 600;
+        padding: 20px;
+    }
+    
+    .card-body {
+        padding: 30px;
+    }
+    
+    .detail-row {
+        padding: 15px 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .detail-row:last-child {
+        border-bottom: none;
+    }
+    
+    .detail-label {
+        color: #666;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+    
+    .detail-value {
+        color: #333;
+        font-size: 1rem;
+    }
+    
+    .form-control, .form-select {
+        border-radius: 10px;
+        border: 2px solid #e1e5e9;
+        padding: 12px 15px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.15);
+    }
+    
+    .form-label {
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    
+    .btn-success {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        border: none;
+        border-radius: 10px;
+        padding: 15px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .btn-success:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(40, 167, 69, 0.4);
+        background: linear-gradient(135deg, #218838 0%, #1ca87d 100%);
+    }
+    
+    .btn-primary {
+        border-radius: 10px;
+        padding: 10px 30px;
+        font-weight: 600;
+    }
+    
+    .badge {
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+    
+    .protection-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+    
+    .protection-item {
+        padding: 20px;
+        transition: transform 0.3s ease;
+    }
+    
+    .protection-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    .protection-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+    
+    .alert {
+        border-radius: 10px;
+        border: none;
+    }
+    
+    .sold-out-section {
+        padding: 40px 20px;
+    }
+    
+    .sold-out-icon {
+        font-size: 4rem;
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="container booking-container">
     <!-- Flight Header -->
-    <div class="row mb-5">
+    <div class="row mb-4">
         <div class="col-12">
-            <div class="card bg-light">
-                <div class="card-body">
+            <div class="card flight-header-card">
+                <div class="card-body py-4">
+                    <h1 class="text-center mb-4">Book Your Flight</h1>
                     <div class="row align-items-center">
                         <div class="col-md-8">
-                            <h1 class="display-5 mb-2">Book Your Flight</h1>
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="text-center me-4">
-                                    <h3 class="text-primary mb-1">{{ flight.origin.code }}</h3>
-                                    <small class="text-muted">{{ flight.origin.city }}</small>
+                            <div class="flight-route">
+                                <div class="airport-info">
+                                    <div class="airport-code">{{ flight.origin.code }}</div>
+                                    <div class="airport-city">{{ flight.origin.city }}</div>
                                 </div>
-                                <div class="mx-3">
-                                    <i class="fas fa-plane fa-2x text-muted"></i>
+                                <div class="plane-icon">
+                                    <i class="fas fa-plane fa-3x"></i>
                                 </div>
-                                <div class="text-center">
-                                    <h3 class="text-primary mb-1">{{ flight.destination.code }}</h3>
-                                    <small class="text-muted">{{ flight.destination.city }}</small>
+                                <div class="airport-info">
+                                    <div class="airport-code">{{ flight.destination.code }}</div>
+                                    <div class="airport-city">{{ flight.destination.city }}</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 text-md-end">
-                            <h2 class="text-success">${{ flight.price }}</h2>
-                            <small class="text-muted">per seat</small>
+                        <div class="col-md-4">
+                            <div class="price-display">
+                                <div class="price-amount">${{ flight.price }}</div>
+                                <div class="price-label">per seat</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -40,60 +226,58 @@
 
     <div class="row">
         <!-- Flight Details -->
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm">
+        <div class="col-lg-6 mb-4">
+            <div class="card details-card">
                 <div class="card-header bg-primary text-white">
                     <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Flight Details</h5>
                 </div>
                 <div class="card-body">
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <strong>Flight Number:</strong>
-                        </div>
-                        <div class="col-6">
-                            {{ flight.number }}
+                    <div class="detail-row">
+                        <div class="row">
+                            <div class="col-5 detail-label">Flight Number:</div>
+                            <div class="col-7 detail-value">{{ flight.number }}</div>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <strong>Departure:</strong>
-                        </div>
-                        <div class="col-6">
-                            {{ flight.departure_time|localtime|date:"M d, Y" }}<br>
-                            <small class="text-muted">{{ flight.departure_time|localtime|time:"H:i" }}</small>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <strong>Arrival:</strong>
-                        </div>
-                        <div class="col-6">
-                            {{ flight.arrival_time|localtime|date:"M d, Y" }}<br>
-                            <small class="text-muted">{{ flight.arrival_time|localtime|time:"H:i" }}</small>
+                    <div class="detail-row">
+                        <div class="row">
+                            <div class="col-5 detail-label">Departure:</div>
+                            <div class="col-7 detail-value">
+                                {{ flight.departure_time|localtime|date:"M d, Y" }}<br>
+                                <small class="text-muted">{{ flight.departure_time|localtime|time:"H:i" }}</small>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <strong>Duration:</strong>
-                        </div>
-                        <div class="col-6">
-                            {% with duration=flight.arrival_time|timeuntil:flight.departure_time %}
-                            <span class="badge bg-light text-dark">{{ duration }}</span>
-                            {% endwith %}
+                    <div class="detail-row">
+                        <div class="row">
+                            <div class="col-5 detail-label">Arrival:</div>
+                            <div class="col-7 detail-value">
+                                {{ flight.arrival_time|localtime|date:"M d, Y" }}<br>
+                                <small class="text-muted">{{ flight.arrival_time|localtime|time:"H:i" }}</small>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <strong>Available Seats:</strong>
+                    <div class="detail-row">
+                        <div class="row">
+                            <div class="col-5 detail-label">Duration:</div>
+                            <div class="col-7 detail-value">
+                                {% with duration=flight.arrival_time|timeuntil:flight.departure_time %}
+                                <span class="badge bg-light text-dark">{{ duration }}</span>
+                                {% endwith %}
+                            </div>
                         </div>
-                        <div class="col-6">
-                            {% if flight.available_seats > 5 %}
-                                <span class="badge bg-success">{{ flight.available_seats }} available</span>
-                            {% elif flight.available_seats > 0 %}
-                                <span class="badge bg-warning text-dark">{{ flight.available_seats }} left</span>
-                            {% else %}
-                                <span class="badge bg-danger">Sold out</span>
-                            {% endif %}
+                    </div>
+                    <div class="detail-row">
+                        <div class="row">
+                            <div class="col-5 detail-label">Available Seats:</div>
+                            <div class="col-7 detail-value">
+                                {% if flight.available_seats > 5 %}
+                                    <span class="badge bg-success">{{ flight.available_seats }} available</span>
+                                {% elif flight.available_seats > 0 %}
+                                    <span class="badge bg-warning text-dark">Only {{ flight.available_seats }} left!</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Sold out</span>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -101,8 +285,8 @@
         </div>
 
         <!-- Booking Form -->
-        <div class="col-md-6">
-            <div class="card shadow-sm">
+        <div class="col-lg-6 mb-4">
+            <div class="card details-card">
                 <div class="card-header bg-success text-white">
                     <h5 class="mb-0"><i class="fas fa-ticket-alt me-2"></i>Book Your Seats</h5>
                 </div>
@@ -129,7 +313,9 @@
                         {% endif %}
 
                         <div class="mb-3">
-                            <label for="{{ form.name.id_for_label }}" class="form-label fw-bold">Passenger Name</label>
+                            <label for="{{ form.name.id_for_label }}" class="form-label">
+                                <i class="fas fa-user me-1"></i> Passenger Name
+                            </label>
                             {{ form.name }}
                             {% if form.name.errors %}
                                 <div class="text-danger small mt-1">
@@ -141,7 +327,9 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="{{ form.email.id_for_label }}" class="form-label fw-bold">Email Address</label>
+                            <label for="{{ form.email.id_for_label }}" class="form-label">
+                                <i class="fas fa-envelope me-1"></i> Email Address
+                            </label>
                             {{ form.email }}
                             {% if form.email.errors %}
                                 <div class="text-danger small mt-1">
@@ -153,7 +341,9 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="{{ form.seats.id_for_label }}" class="form-label fw-bold">Number of Seats</label>
+                            <label for="{{ form.seats.id_for_label }}" class="form-label">
+                                <i class="fas fa-chair me-1"></i> Number of Seats
+                            </label>
                             {{ form.seats }}
                             {% if form.seats.errors %}
                                 <div class="text-danger small mt-1">
@@ -172,7 +362,7 @@
                         </div>
 
                         {% if not request.user.is_authenticated %}
-                        <div class="alert alert-warning mt-3">
+                        <div class="alert alert-info mt-3">
                             <small>
                                 <i class="fas fa-info-circle me-1"></i>
                                 You'll be redirected to login to complete your booking.
@@ -181,11 +371,13 @@
                         {% endif %}
                     </form>
                     {% else %}
-                    <div class="text-center py-4">
-                        <i class="fas fa-times-circle fa-3x text-danger mb-3"></i>
-                        <h5 class="text-danger">Flight Sold Out</h5>
-                        <p class="text-muted">This flight has no available seats.</p>
-                        <a href="{% url 'flight_list' %}" class="btn btn-primary">Browse Other Flights</a>
+                    <div class="sold-out-section text-center">
+                        <i class="fas fa-times-circle sold-out-icon text-danger"></i>
+                        <h4 class="text-danger mb-3">Flight Sold Out</h4>
+                        <p class="text-muted mb-4">This flight has no available seats.</p>
+                        <a href="{% url 'flight_list' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-search me-2"></i>Browse Other Flights
+                        </a>
                     </div>
                     {% endif %}
                 </div>
@@ -193,27 +385,36 @@
         </div>
     </div>
 
-    <!-- Booking Information -->
+    <!-- Booking Protection -->
     <div class="row mt-4">
         <div class="col-12">
-            <div class="card bg-light">
-                <div class="card-body">
-                    <h6 class="mb-3"><i class="fas fa-shield-alt me-2 text-primary"></i>Booking Protection</h6>
+            <div class="card protection-card">
+                <div class="card-body py-4">
+                    <h5 class="text-center mb-4">
+                        <i class="fas fa-shield-alt me-2 text-primary"></i>
+                        <strong>Your Booking is Protected</strong>
+                    </h5>
                     <div class="row text-center">
-                        <div class="col-md-4 mb-3">
-                            <i class="fas fa-lock text-success fa-lg mb-2"></i>
-                            <h6 class="mb-1">Secure Payment</h6>
-                            <p class="text-muted small mb-0">Your payment information is protected</p>
+                        <div class="col-md-4">
+                            <div class="protection-item">
+                                <i class="fas fa-lock protection-icon text-success"></i>
+                                <h6 class="mb-2 fw-bold">Secure Payment</h6>
+                                <p class="text-muted small mb-0">Your payment information is encrypted and protected</p>
+                            </div>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            <i class="fas fa-sync-alt text-success fa-lg mb-2"></i>
-                            <h6 class="mb-1">Easy Changes</h6>
-                            <p class="text-muted small mb-0">Flexible booking modifications</p>
+                        <div class="col-md-4">
+                            <div class="protection-item">
+                                <i class="fas fa-sync-alt protection-icon text-primary"></i>
+                                <h6 class="mb-2 fw-bold">Easy Changes</h6>
+                                <p class="text-muted small mb-0">Flexible booking modifications available anytime</p>
+                            </div>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            <i class="fas fa-headset text-success fa-lg mb-2"></i>
-                            <h6 class="mb-1">24/7 Support</h6>
-                            <p class="text-muted small mb-0">We're here to help anytime</p>
+                        <div class="col-md-4">
+                            <div class="protection-item">
+                                <i class="fas fa-headset protection-icon text-info"></i>
+                                <h6 class="mb-2 fw-bold">24/7 Support</h6>
+                                <p class="text-muted small mb-0">Our team is always here to assist you</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -221,37 +422,4 @@
         </div>
     </div>
 </div>
-
-<style>
-.card {
-    border: none;
-    border-radius: 12px;
-}
-
-.card-header {
-    border-radius: 12px 12px 0 0 !important;
-    font-weight: 600;
-}
-
-.btn {
-    border-radius: 8px;
-    font-weight: 500;
-}
-
-.form-control {
-    border-radius: 8px;
-    border: 1px solid #e1e5e9;
-    padding: 10px 12px;
-}
-
-.form-control:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.1);
-}
-
-.badge {
-    font-size: 0.75rem;
-    font-weight: 500;
-}
-</style>
 {% endblock %}

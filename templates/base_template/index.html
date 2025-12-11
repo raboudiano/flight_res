@@ -4,7 +4,7 @@
 {% block title %}SKY TRAVEL | Flight Booking{% endblock %}
 
 {% block content %}
-<!-- Custom spacing fixes -->
+<!-- Custom spacing and styling fixes -->
 <style>
     /* Immediate spacing fixes */
     main {
@@ -18,6 +18,40 @@
     
     #welcome {
         padding: 80px 0 !important;
+        background-color: #f8f9fa;
+        position: relative;
+        z-index: 10;
+        clear: both;
+    }
+    
+    #welcome h3 {
+        color: #333 !important;
+        font-weight: 700;
+        font-size: 2.5rem;
+        background: transparent !important;
+        text-shadow: none !important;
+    }
+    
+    #welcome h4 {
+        color: #666 !important;
+        font-weight: 400;
+        background: transparent !important;
+        text-shadow: none !important;
+    }
+    
+    /* Fix carousel caption overflow */
+    .carousel-caption {
+        position: absolute !important;
+        z-index: 5 !important;
+    }
+    
+    #headerSlider {
+        margin-bottom: 0 !important;
+    }
+    
+    #header-bottom {
+        position: relative;
+        z-index: 1;
     }
     
     #amenities {
@@ -26,10 +60,40 @@
     
     #rooms {
         padding: 80px 0 !important;
+        background-color: #f8f9fa;
     }
     
     #call-us {
         padding: 80px 0 !important;
+    }
+    
+    .destination-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .destination-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+    
+    .section-header {
+        margin-bottom: 50px;
+    }
+    
+    .section-header h2 {
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 15px;
+    }
+    
+    .item i {
+        transition: transform 0.3s ease;
+    }
+    
+    .item:hover i {
+        transform: scale(1.1);
     }
 </style>
 
@@ -40,7 +104,6 @@
         <div class="container">
             <h1>Explore the World with Sky Travel</h1>
             <div class="form-row">
-                <!-- Your search form remains the same -->
                 <div class="control-group col-md-2">
                     <label>From</label>
                     <select class="custom-select">
@@ -168,14 +231,14 @@
 <div id="welcome">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-8 mx-auto text-center">
-                <h3 class="mb-3">Welcome to Sky Travel</h3>
-                <h4 class="mb-4 text-muted">Your Gateway to the World</h4> 
-                <p class="lead mb-5">
+            <div class="col-lg-10 mx-auto text-center">
+                <h3 class="mb-4">Welcome to Sky Travel</h3>
+                <h4 class="mb-4">Your Gateway to the World</h4> 
+                <p class="lead mb-5" style="color: #555; font-size: 1.1rem;">
                     Book flights to over 500 destinations worldwide with the best prices guaranteed. 
                     Whether you're traveling for business or pleasure, we make your journey comfortable and memorable.
                 </p>
-                <a href="{% url 'flight_list' %}" class="btn btn-primary btn-lg">View All Flights</a>
+                <a href="{% url 'flight_list' %}" class="btn btn-primary btn-lg px-5 py-3">View All Flights</a>
             </div>
         </div>
     </div>
@@ -187,14 +250,14 @@
     <div class="container">
         <div class="section-header text-center">
             <h2>Why Choose Sky Travel?</h2>
-            <p>
+            <p style="color: #666; font-size: 1.1rem;">
                 We offer the best services to make your travel experience seamless and enjoyable.
             </p>
         </div>
         <div class="row">
             <div class="col-md-3 col-sm-6 text-center mb-4">
                 <div class="item">
-                    
+                    <i class="fas fa-globe fa-3x text-primary mb-3"></i>
                     <h4>500+ Destinations</h4>
                     <p class="text-muted">Fly to major cities and hidden gems around the world</p>
                 </div>
@@ -215,7 +278,7 @@
             </div>
             <div class="col-md-3 col-sm-6 text-center mb-4">
                 <div class="item">
-                    
+                    <i class="fas fa-tag fa-3x text-primary mb-3"></i>
                     <h4>Best Prices</h4>
                     <p class="text-muted">Guaranteed lowest prices or we'll match the difference</p>
                 </div>
@@ -230,7 +293,7 @@
     <div class="container">
         <div class="section-header text-center">
             <h2>Popular Destinations</h2>
-            <p>
+            <p style="color: #666; font-size: 1.1rem;">
                 Discover our most sought-after travel destinations with special offers.
             </p>
         </div>
@@ -289,16 +352,16 @@
     <div class="container">
         <div class="section-header text-center">
             <h2>Ready to Book Your Flight?</h2>
-            <p>
+            <p style="color: #666; font-size: 1.1rem;">
                 Contact our travel experts for personalized service and special deals.
             </p>
         </div>
         <div class="row">
             <div class="col-12 text-center">
-                <a href="tel:+12345678900" class="btn btn-lg btn-primary mr-3">
-                    <i class="fa fa-phone"></i> +1 ma3aneech numru
+                <a href="tel:+216" class="btn btn-lg btn-primary mr-3 mb-2">
+                    <i class="fa fa-phone"></i> +216
                 </a>
-                <a href="{% url 'contact' %}" class="btn btn-lg btn-outline-primary">
+                <a href="{% url 'contact' %}" class="btn btn-lg btn-outline-primary mb-2">
                     <i class="fa fa-envelope"></i> Contact Us
                 </a>
             </div>
