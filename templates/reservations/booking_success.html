@@ -1,3 +1,4 @@
+
 {% extends 'base_template/base.html' %}
 {% block title %}Booking Success{% endblock %}
 {% block content %}
@@ -7,5 +8,9 @@
 <p>Flight: {{ booking.flight.number }} — {{ booking.flight.origin.code }} → {{ booking.flight.destination.code }}</p>
 <p>Seats: {{ booking.seats }}</p>
 <p>Booked at: {{ booking.booked_at }}</p>
-<p><a href="/">Back to flights</a></p>
+
+<form method="post" action="{% url 'respe="submit" class="btn btn-primary">Resend confirmation email</button>
+</form>
+
+<p>{% url Back to flights</a></p>
 {% endblock %}
